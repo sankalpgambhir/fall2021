@@ -1,0 +1,55 @@
+\question
+
+\begin{proof}
+    First, I argue by explicit construction that a polynomial as required
+    exists, followed by a proof for the uniqueness of this construction.
+    
+    Construct, for each pair \((\alpha_i, \beta_i)\), a polynomial \(f_i(x)\)
+    such that \(f_i(\alpha_j) = \delta_{ij}\cdot \beta_i \forall \) index pairs
+    \((i, j)\). A choice for such a polynomial is:
+    
+    \begin{equation}
+        f_i(x) = \beta_i\cdot\displaystyle\frac{
+            \prod_{j\not = i} (x-\alpha_j)
+        }{
+            \prod_{j\not = i} (\alpha_i-\alpha_j)
+        }
+    \end{equation}
+
+    which is a polynomial of degree \((n-1)\) satisfying the required criteria.
+    The sum of all such polynomials produces the required result:
+
+    \begin{equation}
+        f(x) = \sum_{i=1}^{n} f_i(x)~.
+    \end{equation}
+
+    The existence of the required polynomial is proven. Assume now there are two
+    distinct polynomials \(f(x)\) and \(g(x)\), each with degree less than
+    \((n-1)\), satisfying the requirements. Thus, they each have monomial
+    expansions of the form
+
+    \begin{gather}
+        f(x) = \sum_{j=0}^{n-1} a_j x^j \textnormal{ , and}\\
+        g(x) = \sum_{j=0}^{n-1} b_j x^j ~.
+    \end{gather}
+
+    For each of these, plugging in the values of the given points, we get the
+    linear systems
+
+    \begin{align*}
+        \sum_{j=0}^{n-1} a_j \alpha_1^j &= \beta_1 \\
+        \sum_{j=0}^{n-1} a_j \alpha_2^j &= \beta_2 \\
+                                        &\;\;\vdots \notag \\
+        \sum_{j=0}^{n-1} a_j \alpha_n^j &= \beta_n
+    \end{align*}
+
+    and likewise for \(g(x)\), with the \(b_j\) as coefficients. This can be
+    seen as a linear system given by the Vandermonde matrix and the vector
+    \((\beta_j)\), with the vectors \((a_j)\) and \((b_j)\) as solutions to the
+    system. However, from the previous question we know that the Vandermonde
+    matrix is in fact of full rank, so there is a unique solution to this linear
+    system, and thus the solution vectors must be equal, i.e., \(a_j = b_j
+    \forall j \in \{1, 2, ..., n\}\). Consequently, \(f(x) = g(x)\), so we have
+    a contradiction. There is thus a unique polynomial satisfying the given
+    requirements.
+\end{proof}

@@ -1,0 +1,26 @@
+% is draft? display comments and notes?
+\newcounter{draft}
+\setcounter{draft}{0}
+
+% input general format
+\input{../macro}
+
+% ooverride title defaults
+\renewcommand{\hwtype}{Assignment}
+\renewcommand{\hwnum}{1}
+\renewcommand{\hwdate}{August 19, 2021}
+
+% custom symbols
+% \usepackage{newunicodechar}
+% \newunicodechar{▲}{\ensuremath{\blacktriangle}}
+\renewcommand{\labelenumii}{\arabic{enumii}.}
+
+\begin{document}
+    \maketitle
+
+    \input{q1} \vspace{2cm}
+    \input{q2} \vspace{2cm}
+    \input{q3}
+    \input{q4}
+
+\end{document}

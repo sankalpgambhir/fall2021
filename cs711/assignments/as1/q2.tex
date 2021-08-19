@@ -1,0 +1,67 @@
+\question
+
+\begin{alphaparts}
+    
+    \questionpart
+    % full rank proof
+    \begin{proof}
+        
+        We prove the full-rank property of the Vandermonde matrix (denoted here as
+        \(V_n\)) as defined via induction.
+        
+        Base case: \(n = 1\). We have
+    
+        \begin{equation}
+            V_1 = \begin{bmatrix}
+                1
+            \end{bmatrix}
+        \end{equation}
+    
+        is clearly of full rank. The base case is clear.
+    
+        Induction: Suppose \(\forall m \in \naturals\) with \(m < n\) implies
+        \(V_m\) is of full rank. Then consider the matrix \(V_n\) over
+        \(\{\alpha_i\}\) then for \(V_n\) to be of full rank, the vectors
+        \(\vec{A_{i}} = (\alpha_i^j)\) must form a set of \(n\) linearly
+        independent vectors. If possible, consider that the \(\{A_i\}\) to be
+        linearly dependent instead. Then, there exist scalars \(\{c_i\}\) such
+        that
+        \begin{gather}
+            \sum_{i = 1}^{n} c_i\vec{A_{i}} = 0 \textnormal{ , or} \\
+            \forall i\; \sum_{j = 0}^{n-1} c_j \cdot \alpha_i^j = 0~.
+            \label{eqn:vanderroots}
+        \end{gather}
+    
+        Consider the polynomial formed with these \((c_i)\) as coefficients, \(f(x)
+        = \sum_{j = 0}^{n-1} c_j \cdot x^j\), with \(\degree{f} = (n-1)\). We know
+        of \(n\) roots of this polynomial from \autoref{eqn:vanderroots}, of the set
+        \(\{\alpha_i\}\). However, this clearly violates the fact the that the
+        number of roots must be less than or equal to the degree of the polynomial.
+        Thus, we have a contradiction, and \(V_n\) is indeed of full rank. 
+    \end{proof}
+
+    \questionpart
+    % determinant value proof
+    \begin{proof}
+        
+        Consider the determinant of \(V_n\) as defined above instead as a
+        function over one of the \(\alpha_i\), replacing it with a variable
+        \(x\) in the field. As we choose \(x = \alpha_j\) for \(j < i\), we find
+        that the determinant vanishes due to having two identical rows. The
+        determinant being a polynomial (of degree $(n-1)$ in $x$), must have
+        \((x - \alpha_j)\) as divisors. Repeating this for each \(i\), we find
+        that the determinant must be divisible by the product polynomial
+        \(\prod_{j < i} (\alpha_i - \alpha_j)\), i.e.
+    
+        \begin{equation}
+            \exists q(x) \in \field[x] \;|V_n| = q(\{\alpha_k\})\cdot\prod_{j < i} (\alpha_i - \alpha_j)~.
+        \end{equation}
+
+        The product contains each \(\alpha_i\) exactly \((n-1)\) times, which
+        can also by a first step expansion be verified to be the degree of the
+        determinant in \(\alpha_i\). So, \(q(\alpha_k)\) may not contain any
+        terms involving \(\alpha_i\). Likewise it follows for all other
+        parameters. Hence, \(q(\{\alpha_k\})\) is a scalar, which by painstaking
+        inductive expansion can be verified to be 1 as well.
+    \end{proof}
+\end{alphaparts}

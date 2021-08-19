@@ -1,0 +1,37 @@
+\question
+
+\begin{proof}
+
+Given, \field~ is a field of characteristic $p$, \underline{assumed prime}. Then,
+over the polynomial ring $\field[x, y]$, we evaluate the expression \((x+y)^p\).
+
+Since field multiplication is commutative, we may write the binomial expansion
+of the expression, with coefficients \(c_i\) yet undetermined as
+
+\begin{equation}
+    (x+y)^p = \sum_{i = 0}^{p} c_i \cdot x^iy^{p-i}~~.
+\end{equation}
+
+It is easy to see that \(c_i = \sum_{j = 1}^{\binom{p}{i}} 1\), \(1 \in
+\field\), i.e., \(\binom{p}{i}\in\integers\) terms of the form \(x^iy^{p-i}\)
+were obtained and summed. Clearly, \(c_0 = c_p = 1\), and \(\forall i \in
+\naturals, \textnormal{and } i < p\), we have
+
+\begin{equation}
+    \binom{p}{i} = \frac{p!}{(p-i)!\cdot i!} = \frac{p\cdot (p-1)!}{(p-i)!\cdot i!}~~.
+\end{equation}
+
+In the factorial, and subsequently prime expansion of the denominator, every
+number obtained will be smaller than \(p\), and by virtue of \(p\) being prime,
+will not divide the term in the numerator, leading to \(\binom{p}{i}\) being
+divisible by \(p\). And due to \(p\) being the characteristic of the field
+\field, we have
+
+\begin{gather}
+    \forall i\;\exists k_i\; \binom{p}{i} = p\cdot k_i \textnormal{, and } \\
+    c_i = \sum_{j = 1}^{k_i} \left( \sum_{n = 1}^{p} 1 \right) = \sum_{j = 1}^{k_i} 0 = 0~.
+\end{gather}
+
+Thus, we have \((x+y)^p = x^p + y^p\).
+
+\end{proof}

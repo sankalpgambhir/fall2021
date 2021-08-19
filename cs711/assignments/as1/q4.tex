@@ -1,0 +1,124 @@
+\question
+
+\begin{alphaparts}
+
+    \questionpart 
+        \begin{proof}
+            \underline{Forward \((\Rightarrow)\) direction:}\\
+            \(\alpha\) is zero of multiplicity atleast \(k\). Then \(\forall i
+            \in \naturals\), with \(i \leq k\), we have 
+            
+            \begin{equation}
+                \frac{\partial^i f}{\partial x^i}(\alpha) = 0. 
+                \label{eqn:diffpart}
+            \end{equation}
+
+            In particular, for \(i = 0\) we find that \(\alpha\) is a root of
+            the polynomial. And thus we can write \(f(x) = (x-\alpha)q_0(x)\)
+            for some polynomial \(q_0(x)\) of degree one less than \(f(x)\).
+            Differentiating this expression, we obtain the polynomial \(f'(x) =
+            q_0(x) + (x - \alpha)q_0'(x)\), which due to \autoref{eqn:diffpart},
+            also has \(\alpha\) as a root, and we find that in fact, \(q_0(x) =
+            (x - \alpha)q_1(x)\) for a polynomial \(q_1(x)\) as before.
+            Continuing this up to \(k\) differentiations we find \(\exists
+            q_k(x) \in \complex[x], \textnormal{ such that } f(x) =
+            (x-\alpha)^k\cdot q_k(x)\) as required per the definition of
+            divisibility.
+
+            \underline{Backward \((\Leftarrow)\) direction:}\\
+            Given, \(\exists \alpha, k\) such that \((x-\alpha)^k\) divides the
+            polynomial \(f(x)\), i.e. we can write for some \(q(x) \in
+            \complex[x]\), \(f(x) = (x-\alpha)^k \cdot q(x)\).
+
+            Define the set \(D_n \subseteq \complex[x]\) for each \(n\)
+            containing all the polynomials from the ring which are divisible by
+            \((x-\alpha)^n\). This is a descending chain of ideals. We note two
+            things, first, \(\forall n, D_n \subseteq D_{n-1}\), and second,
+            \(f(x) \in D_k\). I induct over \(n\) to show the desired property:
+
+            \begin{equation}
+                \forall t(x) \in D_n, \frac{\partial^n t}{\partial x^n}(\alpha) = 0~.
+                \label{eqn:inductpropd}
+            \end{equation}
+
+            Also note, two corollaries of the definition, \(\forall t(x) \in
+            D_n\), we have:
+
+            \begin{enumerate}
+                \item \(t'(x) \in D_{n-1}\), and
+                \item \((x-\alpha)\cdot t(x) \in D_{n+1}\).
+            \end{enumerate}
+
+            Base case:
+            
+            \(\forall t(x) \in D_0, \textnormal{ since } t(\alpha) = 0,
+            \textnormal{ then we have } \frac{\partial^0 t}{\partial x^0}(\alpha)
+            = t(\alpha) = 0.\) So, the base case is clear.
+
+            Induction:
+
+            Given that \(\forall m \in \naturals\) with \(m < n, D_m\) satisfies
+            the property in \autoref{eqn:inductpropd}, we write for some \(t(x)
+            \in D_n\),
+
+            \begin{gather}
+                \exists q_t(x) \in D_{n-1} \textnormal{ such that } t(x) = (x-\alpha)q_t(x),\\ 
+                \frac{\partial t}{\partial x}(x) = (x-\alpha)q_t'(x) + q_t(x),  \textnormal{ and } \\
+                \frac{\partial^n t}{\partial x^n}(x) = \frac{\partial^{n-1}}{\partial x^{n-1}}(x-\alpha)q_t'(x) + \frac{\partial^{n-1}}{\partial x^{n-1}}q_t(x)~.
+            \end{gather}
+
+            Using the corollaries noted above, we see that the operands of the
+            differential operators on the right in the last equation are both in
+            \(D_{n-1}\), and thus the right side evaluates to zero on
+            substituting \(x = \alpha\). So, 
+            
+            \begin{equation}
+                \frac{\partial^n t}{\partial x^n}(\alpha) = 0~,
+            \end{equation}
+
+            and the induction is complete.
+
+            Since \(f(x) \in D_k\), it satisfies the required property.
+
+        \end{proof}
+
+    \questionpart 
+    \begin{proof}
+        Due to the algebraic completeness of the complex field, and
+        the Fundamental Theorem of Algebra, we can write:
+    
+        \begin{equation}
+            f(x) = c\cdot\prod_i (x-\beta_i)^{k_i}~,
+        \end{equation}
+    
+        where the \(\{(\beta_i, k_i)\}\) are the roots of the polynomial and
+        their degrees respectively, and \(c\) is a complex scalar. It is easy to
+        see from part (a) and this equation that in fact \(\mult{f}{\beta_i} =
+        k_i \forall i\) and by expanding the polynomial we note \(\sum_{i} k_i =
+        \degree{f}\).
+    
+        We can thus write
+    
+        \begin{gather}
+            \sum_{i} \mult{f}{\beta_i} = \degree{f}~, \textnormal{ and} \label{eqn:sumroots}\\
+            \mult{f}{\alpha} = 0 \textnormal{ if } \not \exists i\;\alpha = \beta_i~.
+            \label{eqn:multzero}
+        \end{gather}
+    
+        Now, for an arbitrary set \(S = \{\alpha_1, \alpha_2, ..., \alpha_n\}
+        \subseteq \complex\), we write the sum of multiplicities due to
+        \autoref{eqn:multzero} as
+    
+        \begin{equation}
+            \sum_{\alpha \in S} \mult{f}{\alpha} = \sum_{\alpha \in S \cap \{\beta_i\}} \mult{f}{\alpha}~.
+        \end{equation}
+    
+        where the right side is identified easily as a subset of the sum in
+        \autoref{eqn:sumroots}, and thus we obtain
+    
+        \begin{equation}
+            \sum_{\alpha \in S} \mult{f}{\alpha} \leq \degree{f}~.
+        \end{equation}
+    \end{proof}
+
+\end{alphaparts}

@@ -1,3 +1,3 @@
-# Fall 2020
+# Fall 2021
 
-Notes, materials, and assignment submissions for the Fall 2020 semester.
+Notes, materials, and assignment submissions for the Fall 2021 semester.
