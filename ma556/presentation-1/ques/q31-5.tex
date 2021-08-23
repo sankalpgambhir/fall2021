@@ -1,0 +1,176 @@
+
+\begin{frame}
+    \frametitle{Problem Set 3.1 - 5 --- Karthik Dasigi}
+    \emph{Problem Statement}
+
+    For any metric spaces \(X\) and \(Y\), put three metrics on \(X \times Y\)
+    by analogy with the Euclidean, diamond, and square metrics on \(\reals^2\).
+    Show that: For any metrix space \(X\), the distance function \(d: X \times X
+    \to \reals\) is continuous (wrt either of the three metrics on \(X \times
+    X\)).
+\end{frame}
+
+\begin{frame}
+    \frametitle{Metric analogues}
+
+    Suppose \(d_x\) is the distance function on \(X\), and \(d_y\) is the distance function on \(Y\).
+    Analogous to the three metrics on \(\reals^2\), we can create three metrics on \(X\times Y\) that
+    describe the distance between the points \((x_1, y_1)\) and \((x_2, y_2)\):
+    \begin{itemize}
+        \item Euclidean\(_{X\times Y}\): \(\sqrt{d_x(x_1, x_2)^2 + d_y(y_1, y_2)^2}\)
+        \item Square\(_{X\times Y}\): \textbf{max}(\(d_x(x_1, x_2) , d_y(y_1, y_2)\))
+        \item Diamond\(_{X\times Y}\): \(d_x(x_1, x_2) + d_y(y_1, y_2)\)
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Continuity of the distance function}
+
+    We need to now show that the metric on a metric space \(X\), when viewed as
+    a function from the larger space \(X\times X\) to \(\reals\) is continuous
+    wrt to the metrics defined here. 
+
+\end{frame}
+
+\begin{frame}
+
+    \frametitle{Continuity}
+
+    \begin{definition}[Continuity]
+        Suppose \(X\) and \(Y\) are metric spaces. A function \(f : X \rightarrow Y\)
+        is continuous if for any point \(x_0 \in X\), given \(\epsilon > 0\),
+        there exists \(\delta > 0\) such that
+        \begin{equation}
+            d(x,x_0)<\delta \text{ implies } d(f(x), f(x_0))<\epsilon 
+        \end{equation}
+
+    \end{definition}
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Continuity --- Diamond metric}
+
+    We begin with the case for the
+    diamond metric.
+
+    \pause
+
+    For the function \(d: X\times X \to \reals\) we need to show that, for some point \((x_0, y_0)\ \in X\times X \),
+    given an \(\epsilon > 0\), there exists a \(\delta\) such that 
+
+    \begin{gather}
+        \Delta((x, y), (x_0, y_0)) < \delta \Rightarrow |\metric{x}{y} - \metric{x_0}{y_0}| < \epsilon~.
+    \end{gather}
+
+    Note that the diamond metric \(\Delta((x, y), (x_0, y_0)) = \metric{x}{x_0} + \metric{y}{y_0}\)
+    and the function \(d\) is the metric on \(X\).
+
+    % note that the left side of the implication is simply the distance function
+    % over X x X, and the right side is the same over R
+    
+\end{frame}
+
+\begin{frame}
+    We begin with the given bound \(\epsilon\) such that
+
+    \begin{gather}
+        |\metric{x}{y} - \metric{x_0}{y_0}| < \epsilon~, \nonumber\\
+        \metric{x}{y} - \metric{x_0}{y_0} < \epsilon~,  \nonumber\\
+        \metric{x}{y} +\metric{x_0}{y_0}< \epsilon + 2\metric{x_0}{y_0}~.
+    \end{gather}
+    (We will discuss the case of negative \(\epsilon\) bound later)
+    \pause
+
+    Adding \(2\metric{y}{x_0}\) to both sides and using the triangle inequality,
+    we obtain
+
+    \begin{tcolorbox}[colframe=red, colback=red!10!white]
+        \begin{align}
+            T = \metric{x}{x_0} + \metric{y}{y_0} &\leq (\metric{x}{y} + \metric{y}{x_0}) + (\metric{y}{x_0}+\metric{x_0}{y_0}) \nonumber\\ 
+            &< \epsilon + 2\metric{x_0}{y_0} + 2\metric{y}{x_0}~.
+            \label{eqn:tresult}
+        \end{align}
+    \end{tcolorbox}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Peeking along a side}
+
+    To resolve the terms dependent on only \(y\), let us consider
+    the dimensionally reduced problem, or proving continuity along the y-axis
+    inside the \(\epsilon\)-ball around the point \((x_0, y_0)\), i.e.
+
+    \begin{gather*}
+        \text{Given } \epsilon \in \reals > 0 \text{ as before, with} \\
+        |\metric{x_0}{y} - \metric{x_0}{y_0}| <
+        \epsilon~.
+    \end{gather*}
+
+    \pause
+
+    It is easy to now see the reduction
+
+    \begin{gather}
+        \metric{x_0}{y} - \metric{x_0}{y_0} < \epsilon~, \nonumber \\
+        \metric{x_0}{y} < \epsilon + \metric{x_0}{y_0}~.
+        \label{eqn:ybound}
+    \end{gather}
+
+    We see that this is a bound on the \(y\) dependant term that is constant
+    for a given (\(x_0, y_0\)).
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Collecting results}
+
+    From the results for \(T \text{ and } y\) in \autoref{eqn:tresult} and
+    \autoref{eqn:ybound}, we obtain the bound on \(T\)
+
+    \begin{equation}
+        T < \epsilon + 2\metric{x_0}{y_0} + 2\metric{y}{x_0} < 3\epsilon + 4\metric{x_0}{y_0} = \delta(\epsilon)
+        \label{eqn:finaltbound}
+    \end{equation}
+
+    as required. Using the other half of the absolute value inequality,
+    \(\metric{x}{y} - \metric{x_0}{y_0} > - \epsilon\), we similarly get the
+    bound
+
+    \begin{equation*}
+        T < 5\epsilon + 4 \metric{x_0}{y_0}~.
+    \end{equation*}
+
+    So, inequality \autoref{eqn:finaltbound} still gives the tightest bound.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Continuity for other metrics}
+
+    To prove the continuity of the Euclidean and Square metric, we can expand on the proof covered in the previous slides.
+
+    \pause
+    To expand the proof, we make use of the following property:
+    for positive \(x\) and \(y\),
+     
+    \begin{equation}
+        x+y \geq (x^p+y^p)^{1/p} \text{ for } p \geq 1
+    \end{equation}
+
+    (This is can be viewed as the \textit{Minkowski} inequality applied to a 1-dimensional vector)
+
+    \pause
+
+    This means that the same \(\delta(\epsilon)\) can be used for the proof of continuity of the other two metrics.
+    \begin{equation}
+        (\metric{x}{x_0}^p + \metric{y}{y_0}^p)^{1/p} \leq \metric{x}{x_0} + \metric{y}{y_0} < 3\epsilon + 4\metric{x_0}{y_0} = \delta(\epsilon)
+    \end{equation}
+
+    Putting \(p = 2\) proves continuity for the Euclidean metric, and \(p=\infty\) proves continuity for the Square metric
+    
+\end{frame}
+
+% write about the proof for other metrics as well

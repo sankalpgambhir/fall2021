@@ -1,0 +1,41 @@
+\begin{frame}
+    \frametitle{Metric Spaces}
+A \textit{metric space} is a set $X$ equipped with a map $d: X\times X
+\rightarrow \mathbb{R}$ such that :
+\begin{enumerate}
+    \item $d(x,x) = 0$
+    \item $d(x,y)>0$ if $x\neq y$
+    \item $d(x,y) = d(y,x)$
+    \item $d(x,z) \leq d(x,y)+d(y,z)$
+\end{enumerate}
+    
+for all $x,y,z \in X$ \hfill\break
+\hfill\break
+$d$: distance function or metric
+\end{frame}
+
+\begin{frame}
+\frametitle{Problem Set 3.1 - 1}
+\textbf{Show that: For any points $\bm{a,b,x,y}$ in a metric space X,}
+$\bm{|d(a,b) - d(x,y)| \leq d(a,x) + d(b,y)}$\hfill\break
+\hfill\break
+Using the property of the absolute value function $|p|\leq q \iff -q\leq p \leq
+q$ we get:\hfill\break
+\begin{equation*}
+- d(a,x) - d(b,y) \leq d(a,b) - d(x,y) \leq  d(a,x) + d(b,y)
+\end{equation*}
+\hfill\break
+Now we focus on the term $\alpha \triangleq d(a,x) + d(x, y)  + d(y, b)$.
+Using the triangle inequality:
+\begin{equation*}
+d(a,b) \leq d(a,x) + d(x, b) \leq  d(a,x) + d(x, y)  + d(y, b) 
+\end{equation*}
+Rearranging terms and using symmetry we obtain:
+\begin{equation*}
+d(a,b) - d(x,y) \leq  d(a,x) + d(b,y)
+\end{equation*}
+Which is the RHS of the inequality. Similarly, the LHS can be proven: $d(x,z)
+- d(y,z) \leq d(x,y)$ and $\alpha = -d(a,x) -d(x, y)  + d(y, b)$
+% talk about LHS in voiceover
+\end{frame}
+

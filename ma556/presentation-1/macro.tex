@@ -1,0 +1,51 @@
+\usepackage{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{amsthm}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{ifthen}
+\usepackage{lineno}
+\usepackage{multicol}
+\usepackage{ragged2e}
+\usepackage{bm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{tcolorbox}
+
+% drawing stuffs
+\usepackage{pstricks}
+% \usepackage{auto-pst-pdf}
+\usepackage{tikz, tkz-orm, pgfplots}
+\usetikzlibrary{arrows,shapes,automata,backgrounds,petri,decorations.markings}
+\usetikzlibrary{matrix,positioning,decorations.pathreplacing,calc,tikzmark}
+\pgfplotsset{width=7.5cm,compat=1.16}
+\usepgfplotslibrary{fillbetween}
+
+% links
+\usepackage{hyperref, bookmark}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!20!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+% work specific packages
+% \usepackage{ebproof}
+
+\newcommand{\notes}[1]{}
+
+\ifthenelse{\value{notes} > 0}{
+    \renewcommand{\notes}[1]{{\tiny #1}}
+}{}
+
+% actual macros
+\newcommand{\reals}{\ensuremath{\mathbb{R}}}
+\newcommand{\naturals}{\ensuremath{\mathbb{N}}}
+\newcommand{\topx}{\ensuremath{X}}
+\newcommand{\catTop}{\textsf{Top}}
+\newcommand{\Lagr}{\mathcal{L}} \newcommand{\olsi}[1]{\,\overline{\!{#1}}}
+\newcommand{\cat}[1]{\,\textsf{#1}} \newcommand{\bijec}{ \xrightarrow{\cong}}
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\metric}[2]{\ensuremath{d(#1, #2)}}
