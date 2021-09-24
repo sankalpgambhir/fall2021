@@ -1,0 +1,60 @@
+\question
+Since the question asks to pick points for arbitrarily large n, it is assumed
+here that the field itself is sufficiently large to allow picking points
+arbitrarily.
+
+Consider for any set of \(t\) distinct points in \(\field^2\), their evaluation
+over a polynomial in \(\field[x, y]\) with degree \(n \geq 2\),
+
+\begin{gather*}
+    \forall i \in \{0, 1, \ldots, t\}\; P(\alpha_i, \beta_i) = \sum_{j + k < n; j, k \geq 0} a_{jk} \alpha_i^j \beta_i^k ~.
+\end{gather*}
+
+We can write this as the (generally) non-homogeneous linear system
+
+\begin{gather*}
+    \begin{pmatrix}
+        \alpha_1^0\beta_1^0 & \alpha_1^0\beta_1^1 & \ldots & \alpha_1^0\beta_1^n & \alpha_1^1\beta_1^0 & \ldots & \alpha_1^n\beta_1^0 \\
+        \alpha_2^0\beta_2^0 & \alpha_2^0\beta_2^1 & \ldots & \alpha_2^0\beta_2^n & \alpha_2^1\beta_2^0 & \ldots & \alpha_2^n\beta_2^0 \\
+        &&& \vdots &&& \\
+        \alpha_t^0\beta_t^0 & \alpha_t^0\beta_t^1 & \ldots & \alpha_t^0\beta_t^n & \alpha_t^1\beta_t^0 & \ldots & \alpha_t^n\beta_t^0 \\
+    \end{pmatrix}_{t \times \binom{n+2}{2}}
+    \begin{pmatrix}
+        a_{00}\\
+        a_{01}\\
+        \vdots\\
+        a_{n0}
+    \end{pmatrix}_{\binom{n+2}{2}\times 1}
+    = 
+    \begin{pmatrix}
+        P(\alpha_1, \beta_1) \\
+        P(\alpha_2, \beta_2) \\
+        \vdots \\
+        P(\alpha_t, \beta_t) \\
+    \end{pmatrix}_{t\times 1}~.
+\end{gather*}
+
+Conversely, we can replace \(P(\alpha_i, \beta_i)\) by \(\lambda_i\) and look
+for the parameters \(a_{jk}\) which describe the interpolating polynomial. Our
+problem reduces to showing that there exists a pair of a \(t \times n^2\) matrix
+and a \(t\)-vector such that the system has no solutions, i.e. no interpolating
+polynomial exists, for sufficiently bounded t (\(\leq \binom{n+2}{2}\) as
+given).
+
+Consider \(\beta_i = 0 \;\forall i\). This is a univariate interpolation with the
+linear system
+
+\begin{gather*}
+    \sum_{j = 0}^n a_{j0}\alpha_i^j, i \in \{1, 2, \ldots, t\}~.
+\end{gather*}
+
+Choose \(t\) such that \(n+1 < t \leq \binom{n+2}{2}\). This is clearly a
+(possibly highly) overdetermined system. We can construct a set of input points
+that have no solution as follows: pick the first \(n+1\) points arbitrarily.
+These produce a \underline{unique} solution for the coefficients
+\(P\{a_{j0}\}\). Construct the next \((t-n-1)\) points such that they explicitly
+violate the constructed (univariate) polynomial, i.e., \(\lambda_j \not =
+P(\alpha_j, 0)\) for atleast one \(j \in \{n+2, \ldots, t\}\) 
+% (this set is non-empty iff \(n+1<\binom{n+2}{2}\) i.e., \(n>2\))
+. Obviously, this system has no solution. This produces the required set of
+points.

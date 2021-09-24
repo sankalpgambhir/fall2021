@@ -1,0 +1,148 @@
+\question
+
+\newcommand{\tracemap}[0]{\ensuremath{\textsf{Trace}}}
+
+\begin{alphaparts}
+
+    \questionpart
+
+    
+    \begin{proof}
+        Given the polynomial \(\tracemap : \field_{q^k} \to \field_{q^k}\) defined as 
+    
+        \begin{gather*}
+            \tracemap(x) = x + x^q + x^{q^2} + \ldots + x^{q^{k-1}}
+        \end{gather*}
+    
+        consider \(\forall x\) the quantity \(\tracemap(x)^q\). By Freshman's Lemma,
+    
+        \begin{align*}
+            \tracemap(x)^q &= (x)^q + (x^q)^q + (x^{q^2})^q + \ldots + (x^{q^{k-1}})^q \\
+                        &= x^q + x^{q^2} + x^{q^3} + \ldots + x^{q^{k-1}} + x^{q^{k}} \\
+                        &= x^q + x^{q^2} + x^{q^3} + \ldots + x^{q^{k-1}} + x \\
+                        &= \tracemap(x)
+        \end{align*}
+    
+        and thus \(\tracemap(x)\) must be a member of the subfield \(\field_q\). So,
+        we can view \tracemap~ as a map from \(\field_{q^k}\) to the subfield
+        \(\field_q\).
+    \end{proof}
+
+    \questionpart
+
+    
+    \begin{proof}
+        By another application of Freshman's Lemma and the fact that \(\alpha^{q-1}
+        = 1 ~\forall \alpha \in \field_q\), we see that \tracemap~ is indeed linear
+        as well. We have, \(\forall x, y \in \field_{q^k}\) and \(\alpha \in
+        \field_q\),
+    
+        \begin{align*}
+            \tracemap(x + y) &= (x+y) + (x+y)^q + (x+y)^{q^2} + \ldots + (x+y)^{q^{k-1}} \\
+                             &= x + y + x^q + y^q + x^{q^2} + y^{q^2} + \ldots + x^{q^{k-1}} + y^{q^{k-1}}\\
+                             &= \tracemap(x) + \tracemap(y)~, \text{ and}\\
+            \tracemap(\alpha x) &= (\alpha x) + (\alpha x)^q + (\alpha x)^{q^2} + \ldots + (\alpha x)^{q^{k-1}} \\
+                                &= \alpha x + \alpha^q x^q + \alpha^{q^2} x^{q^2} + \ldots + \alpha^{q^{k-1}}x^{q^{k-1}} \\
+                                &= \alpha (x + \alpha^{q-1} x^q + \alpha^{q^2-1} x^{q^2} + \ldots + \alpha^{q^{k-1}-1}x^{q^{k-1}}) \\
+                                &= \alpha \tracemap(x)~,
+        \end{align*}
+    
+        the last step following as \(q^m - 1\) is divisible by \(q-1~ \forall m \geq
+        1\) and thus the relevant powers of \(\alpha\) reduce to identity. The two
+        properties imply \tracemap~ is \(\field_q\) linear.
+    \end{proof}
+
+    \questionpart
+
+    
+    \begin{proof}
+        Viewing \(F_{q^k}\) as a vector space over the base prime field, and using
+        the column vector representation for its elements, we must have all linear
+        maps representable as row vectors (/covectors/members of the dual space).
+        Thus, for a linear map \(L\) on this vector space, we must be able to
+        represent its action on members of the field as multiplication by the row
+        vector
+    
+        \begin{gather*}
+            \begin{pmatrix}
+                L_0 & L_2 & \ldots & L_{k-1}
+            \end{pmatrix}
+        \end{gather*}
+    
+        with its action on some \(A \in \field_{q^k}\) given as
+    
+        \begin{gather*}
+            \begin{pmatrix}
+                L_0 & L_2 & \ldots & L_{k-1}
+            \end{pmatrix}
+            \begin{pmatrix}
+                a_0 & a_2 & \ldots & a_{k-1}
+            \end{pmatrix}^\top~.
+        \end{gather*}
+    
+        Consider now a vector \(B\) in this space such that for some invertable
+        matrix \(\Lambda\)
+    
+        \begin{gather*}
+            B = \Lambda^{-1} A \\
+            A = \Lambda B , \text{ with}\\
+            \Lambda = 
+            \begin{pmatrix}
+                \lambda_0 & 0 & \ldots & 0 \\
+                \lambda_1 & \lambda_0 & \ldots & 0 \\
+                \vdots & \ddots & \ddots & \vdots\\
+                \lambda_{k-1} & \lambda_{k-2} & \ldots & \lambda_0 \\
+            \end{pmatrix}~.
+        \end{gather*}
+    
+        Here, \(\Lambda\) is the multiplicative action of the vector element with
+        coefficients \(\{\lambda_i\}\) and its matrix inverse consequently that of
+        the inverse element. (Invertability just requires \(\lambda_0 \not = 0\) as
+        this is a triangular matrix. I'm not even sure if this is necessary, and I
+        struggle to resolve it later too.)
+    
+        We have,
+    
+        \begin{gather*}
+            L A = L \Lambda B~.
+        \end{gather*}
+    
+        Our inquiry resolves to whether for any other linear map \(M\), we can find
+        a linear map such that \(L \Lambda = M\) and thus \(L (\Lambda B) = M B\).
+        Setting \(L\) to be \(\tracemap\) reduces to the original problem. Resolving
+        the equations and refactoring with \(\{\lambda_i\}\) as the variables in the
+        system, we get 
+    
+        \begin{gather*}
+            % L matrix
+            \begin{pmatrix}
+                L_0 & 0 & \ldots & 0 \\
+                L_1 & L_0 & \ldots & 0 \\
+                \vdots & \ddots & \ddots & \vdots \\
+                L_{k-1} & L_{k-2} & \ldots & L_0 \\
+            \end{pmatrix}
+            % Lambda as a vector
+            \begin{pmatrix}
+                \lambda_0 \\
+                \lambda_1 \\
+                \vdots \\
+                \lambda_{k-1} 
+            \end{pmatrix}
+            = 
+            % M vector
+            \begin{pmatrix}
+                M_0 \\
+                M_1 \\
+                \vdots \\
+                M_{k-1} 
+            \end{pmatrix}
+        \end{gather*}
+    
+        Clearly, this linear system has \(\geq 1\) solutions. Thus, there always
+        exists a vector element for each linear map (possibly more) such that
+        pre-multiplication by it reduces the linear map to another linear map of
+        choice. Setting choice to \(\tracemap\) gives us the required result.
+    \end{proof}
+
+
+\end{alphaparts}

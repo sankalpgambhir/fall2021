@@ -1,0 +1,60 @@
+\question
+
+\newcommand{\poly}{\textsf{poly}}
+
+\begin{alphaparts}
+    \questionpart
+    
+    To compute for each \(i\),
+
+    \begin{gather*}
+        u_i = \frac{1}{\prod_{j\not = i}(\alpha_i - \alpha_j)}
+    \end{gather*}
+
+    divide the denominator into two products of size \(\approx \frac{n}{2}\).
+    Combining these is clearly one multiplication, i.e. \(\order{1}\). The
+    division itself is a constant order field operation, so I just compute the
+    product first. This has the time complexity recurrence
+
+    \begin{gather*}
+        T(n) = 2T(\frac{n}{2}) + \order{1}~.
+    \end{gather*}
+
+    We obtain the total complexity \(\order{\log n}\). Since there are \(n\)
+    such quantities to be computed, we get the total complexity to be
+    \(\order{n\log n}\).
+
+    \questionpart
+    Suppose we break the problem into instead interpolating two sets of
+    \(\frac{n}{2}\) points, with results \(f_1\) and \(f_2\), and writing
+
+    \begin{gather*}
+        f(x) = f_1(x) g_1(x) + f_2(x)g_2(x)\\
+        g_1(x) = \prod_{i \leq \frac{n}{2}} (x-\alpha_i)\\
+        g_2(x) = \prod_{i > \frac{n}{2}} (x-\alpha_i)
+    \end{gather*}
+
+    The base case is the Lagrange interpolation for a single point.
+
+    We can precompute the \(g\) polynomials, and knowing them, the larger
+    problem can be computed in \(\order{n\log^2 n}\) since it has the time
+    complexity recurrence relation
+
+    \begin{gather*}
+        T(n) = 2T(\frac{n}{2}) + \order{n\log n + n}~.
+    \end{gather*}
+
+    As for the precomputation, construct the tree with leaves as
+    \((x-\alpha_i)\) and the layers above them constructed as the products of
+    pairs of the elements of the previous layer. Clearly, these are exactly the
+    \(g\) polynomials required. The time recurrence relation again, with the
+    combination step being the multiplication of two \(\frac{n}{2}\) degree
+    polynomials, is
+
+    \begin{gather*}
+        T(n) = 2T(\frac{n}{2}) + \order{n\log n}~.
+    \end{gather*}
+
+    Total time complexity is thus their sum \(\order{n\log^2 n} = \order{n\poly \log n}\).
+
+\end{alphaparts}
