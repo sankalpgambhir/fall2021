@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 
 #include "bridge.h"
 
@@ -19,12 +20,22 @@ class Network{
         Network(const Network&) = delete;
         Network& operator=(const Network&) = delete;
 
-        Bridge* add_bridge(int);
-        Bridge* get_root(void);
+        // access and modify
+        Bridge* add_bridge(int);                    // add new bridge to network
+        Node* get_node(int);                        // return node pointer for access
+        void add_connection(Bridge*, int);          // add a connection between node and bridge
+
+        // output and control
+        void sort(void);                            // sort bridges and nodes
+        void run_stp(void);                         // run the spanning tree simulation
+        void print_connections(std::ostream&);      // print connection status to given stream
+
 
     private:
         // data
-        std::vector<Bridge> nodes;
+        std::ostream& log;
+        std::vector<Bridge> bridges;
+        std::vector<Node> nodes;
 
 };
 
