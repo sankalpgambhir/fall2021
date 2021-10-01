@@ -1,0 +1,41 @@
+\question
+
+\begin{proof}
+    Consider a multilinear polynomial \(P \in \field[x_1, x_2, \ldots, x_n]\).
+    Since it is multilinear, and thus linear in \(x_1\), we can express it as:
+    \begin{gather*}
+        P(x_1, x_2, \ldots, x_n) = x_1^0P_1(x_2, x_3, \ldots, x_n) + x_1^1P_1'(x_2, x_3, \ldots, x_n)~.
+    \end{gather*}
+
+    As this decomposes into the \((n-1)\) problem, it is easy to see that if
+    either of the polynomials \(P_1\) or \(P_1'\) have non-zero assignments in
+    \(\{0, 1\}^{n-1}\), then we can generate a non-zero assignment including
+    \(x_1 \in \{0, 1\}\). The proof proceeds by induction.
+
+    \emph{Base case:} \(n=1\).
+
+    \(P_1, P_1'\) in this case are constants, with atleast one of them non-zero.
+    If \(P_1\) is \(0\), choose \(x_1 = 1\), else choose \(x_1 = 1\). \(P \not
+    \equiv 0\) guarantees this assignment leads to a non-vanishing result.
+
+    \emph{Induction:} Given that \(\forall m \in \naturals, m < n\), every non-zero
+    multilinear polynomial in \(m\) variables has a non-zero satisfying
+    assignment, the same holds for non-zero multilinear polynomials in \(n\)
+    variables.
+    
+    As before, write 
+
+    \begin{gather*}
+        P(x_1, x_2, \ldots, x_n) = x_1^0P_1(x_2, x_3, \ldots, x_n) + x_1^1P_1'(x_2, x_3, \ldots, x_n)~,
+    \end{gather*}
+
+    where \(P_1, P_1'\) depend on atmost \(n-1\) variables. If \(P_1 \not \equiv
+    0\), by the induction hypothesis, it has an assignment such that it is
+    non-vanishing. Append to such an assignment, \(x_1 = 0\). Else, \(P_1 \equiv
+    0\), so we must have \(P_1' \not \equiv 0\) since \(P\) is given to be
+    non-zero. Append \(x_1 = 1\) to a non-vanishing assignment of \(P_1'\).
+
+    This produces a satisfying assignment for any non-zero multilinear polynomial
+    of degree \(n\).
+
+\end{proof}

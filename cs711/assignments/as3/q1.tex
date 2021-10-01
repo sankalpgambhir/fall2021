@@ -1,0 +1,30 @@
+\question
+
+\begin{proof}
+    Given the set \(S_{d, n}\) as defined, I induct on \(d\) and \(n\) for the
+    polynomial \(f(x_1, x_2, \ldots, x_n)\) of total degree atmost \(d\).
+
+    \emph{Base case:} \(n = 1, d = 1\).
+
+    The relevant polynomial is \(f(x_1) = a_1 x_1 + a_0\), where atleast one
+    \(a_i\) is non-zero, since \(f\) is not identically zero. If \(a_0 \not =
+    0\), set \(x_1 = 0 < d\), else set \(x_1 = 1 \leq d\). This assignment
+    results in a non-vanishing evaluation and satisfies the constraints, i.e, it
+    is in \(S_{d, n}\).
+
+    \emph{Induction on n:} Given a non-zero evaluating assignment can be found
+    for each degree \(c \leq d, \text{and number of variables } m < n\), I show
+    that we can find one for degree \(d\) and \(n\) variables.
+
+    Consider a polynomial \(f(x_1, x_2, \ldots, x_n)\). We can write, 
+
+    \begin{gather*}
+        f(x_1, x_2, \ldots, x_n) = \sum_{i=0}^d x_1^i f_i(x_2, x_3, \ldots, x_n)~,
+    \end{gather*}
+
+    for polynomials \(\{f_i\}\) in \(n-1\) variables and degrees \(\{d-i\}\)
+    respectively. Choose an assignment for the largest \(f_i \not \equiv 0\)
+    such that it satisfies the constraints for \(S_{d-i, n-1}\). After substitution, 
+    we obtain a univariate polynomial in \(x_1\) of degree atmost \(d\). 
+
+\end{proof}
