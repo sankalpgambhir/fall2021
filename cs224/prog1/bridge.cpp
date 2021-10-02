@@ -70,7 +70,6 @@ void Bridge::broadcast(Message m, int incoming_node){
             if(c.first->get_id() != incoming_node){
                 sent = true;
                 c.first->broadcast(m, this->get_id());
-                // std::cout << "Broadcasted on line : " << c.first->get_id() << std::endl;
             }
         }
     }
@@ -87,103 +86,6 @@ void Bridge::broadcast_root(){
 
     this->broadcast(Message(this->id, 0, this->root), -1);
 }
-
-// void Bridge::process_buffer(){
-//     while(!this->message_buffer.empty()){
-//         auto p = message_buffer.front();
-//         auto m = std::get<0>(p);
-//         if(std::get<2>(p) > currtime){
-//             // messages currently 'in transfer'
-//             break;
-//         }
-
-//         // log this message
-//         std::string s = std::to_string(Bridge::currtime) + " r B" + std::to_string(this->get_id()) + m.string();
-
-//         *log << s << std::endl;
-
-//         bool cutline = false;
-
-//         if (m.root <= get_root()){
-//             // actually worthwhile
-//             if(m.root < get_root()){
-//                 // update
-//                 this->root = m.root;
-//                 this->distance_to_root = m.distance + 1;
-//                 this->sender_to_root = m.sender;
-//                 // update connections
-//                 for(auto &c : connections){
-//                     if(c.second == state::RP){
-//                         c.second = state::DP;
-//                     }
-//                     if(c.first->get_id() == std::get<1>(p)){
-//                         c.second = state::RP;
-//                     }
-//                 }
-//             }
-//             else if(m.distance+1 <= distance_to_root){
-//                 // same root, leq distance
-//                 // invalidate all longer distance ports
-//                 if(m.distance+1 < distance_to_root){
-//                     // update
-//                     assert(get_root() == m.root);
-//                     this->distance_to_root = m.distance + 1;
-//                     this->sender_to_root = m.sender;
-//                     for(auto &c : connections){
-//                         if(c.second == state::RP){
-//                             c.second = state::DP;
-//                         }
-//                         if(c.first->get_id() == std::get<1>(p)){
-//                             c.second = state::RP;
-//                         }
-//                     }
-//                 }
-//                 else if(m.sender < sender_to_root){
-//                     // found a lower id equivalent connection
-//                     sender_to_root = m.sender;
-//                     for(auto &c : connections){
-//                         if(c.second == state::RP){
-//                             c.second = state::DP;
-//                         }
-//                         if(c.first->get_id() == std::get<1>(p)){
-//                             c.second = state::RP;
-//                         }
-//                     }
-//                 }
-//             }
-//             if(m.distance+1 >= distance_to_root){
-//                 // path to root of greater distance
-//                 // set to NP
-//                 for(auto &c : connections){
-//                     if(c.first->get_id() == std::get<1>(p) && c.second != state::RP){
-//                         c.second = state::NP;
-//                         std::cout << "Cut line : " << c.first->get_id() << std::endl;
-//                     }
-//                 }
-//             }
-//         }
-
-
-//         for(auto &c : connections){
-//             if(c.first->get_id() == std::get<1>(p) && c.second == state::NP){
-//                 cutline = true;
-//             }
-//         }        
-
-//         if(!cutline && (get_root() == m.root) && (distance_to_root == m.distance+1)){ // don't broadcast if you've cut the line
-//             // message checked, now just broadcast it
-//             m.increment();
-//             m.sender = this->get_id();
-//             this->broadcast(m, std::get<1>(p));
-//         }        
-//         message_buffer.erase(message_buffer.begin());
-//     }
-
-//     // if nothing better than self was found
-//     if(get_id() == get_root()){
-//         broadcast_root();
-//     }
-// }
 
 void Bridge::process_buffer(){
 
@@ -229,7 +131,6 @@ void Bridge::process_buffer(){
                     for(auto &c : connections){
                         if(c.second != state::RP && c.first->get_id() == port && get_id() > m.sender){
                             c.second = state::NP;
-                            // std::cout << "Cut line : " << port << std::endl;
                             break;
                         }
                     }
@@ -271,6 +172,7 @@ void Bridge::process_buffer(){
 }
 
 void Bridge::update_root(Message &m, int port){
+    // update root with the bridge indicated in m received from node 'port'
     this->root = m.root;
     this->port_to_root = port;
     this->sender_to_root = m.sender;
@@ -284,8 +186,6 @@ void Bridge::update_root(Message &m, int port){
             c.second = state::RP;
         }
     }
-
-    // std::cout << "Changed " << get_id() << " root to :" << m.string() << std::endl;
 }
 
 void Bridge::sort(){
