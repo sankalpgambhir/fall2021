@@ -46,6 +46,8 @@ class Node{
         Node(int);
             // no copying or empty constr
         Node() = delete;
+        Node(Node&) = delete;
+        Node& operator=(const Node&) = delete;
 
         // functions
         int get_id() const;                             // return id
@@ -65,6 +67,11 @@ class Bridge{
         Bridge(int, std::ostream*);
             // no copying or empty id
         Bridge() = delete;
+        Bridge(Bridge&) = delete;
+        Bridge& operator=(const Bridge&) = delete;
+            // but need move constructor
+        Bridge(Bridge&&) = default;
+        Bridge& operator=(Bridge&&) = default;
 
         // access and modify
         int get_id(void) const;                         // your id
