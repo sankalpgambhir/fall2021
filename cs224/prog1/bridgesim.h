@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
+#include <deque>
 
 #include "bridge.h"
 
@@ -15,7 +16,7 @@
 class Network{
     public:
         // constructors
-        Network(std::ostream&);                     // will write to stream of choice, clog by default
+        Network(std::ostream&);                     // will write to streams of choice, clog/cout by default
             // no copying
         Network(const Network&) = delete;
         Network& operator=(const Network&) = delete;
@@ -28,14 +29,15 @@ class Network{
         // output and control
         void sort(void);                            // sort bridges and nodes
         void run_stp(void);                         // run the spanning tree simulation
+        bool check_same_root(void);                 // check if all bridges settled on same root
         void print_connections(std::ostream&);      // print connection status to given stream
 
 
     private:
         // data
         std::ostream& log;
-        std::vector<Bridge> bridges;
-        std::vector<Node> nodes;
+        std::deque<Bridge> bridges;
+        std::deque<Node> nodes;
 
 };
 

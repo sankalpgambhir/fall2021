@@ -58,7 +58,7 @@ int main(){
     network.run_stp();
 
     // return the output
-        // print bridge connections directly to stdout
+        // print bridge connections 
         network.print_connections(std::cout);
         // print trace if asked
         if(output_trace){
