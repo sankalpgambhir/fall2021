@@ -1,30 +1,126 @@
 \question
 
 \begin{proof}
-    Given the set \(S_{d, n}\) as defined, I induct on \(d\) and \(n\) for the
-    polynomial \(f(x_1, x_2, \ldots, x_n)\) of total degree atmost \(d\).
+        Given the set \(S_{d, n}\) as defined, suppose if possible that we
+        cannot find an assignment \(\mathbf{b}\) in this set for some non-zero
+        polynomial \(P\) of degree \(\leq d\) in \(n\) variables such that the
+        evaluation is non-vanishing, i.e., \(P(\mathbf{b}) = 0
+        \forall\mathbf{b}\in S_{d, n}\).
 
-    \emph{Base case:} \(n = 1, d = 1\).
+        Write the polynomial \(P\) defined by the \(\binom{n+d}{d}\)
+        coefficients \(\{a_{\alpha_1\alpha_2\ldots\alpha_n}\}\) as a linear
+        functional acting on a vector of pre-evaluated monomials
+        \(\{x_1^{\alpha_1}x_2^{\alpha_2}\ldots x_n^{\alpha_n}\}\) with \(\sum
+        \alpha_i \leq d\),
 
-    The relevant polynomial is \(f(x_1) = a_1 x_1 + a_0\), where atleast one
-    \(a_i\) is non-zero, since \(f\) is not identically zero. If \(a_0 \not =
-    0\), set \(x_1 = 0 < d\), else set \(x_1 = 1 \leq d\). This assignment
-    results in a non-vanishing evaluation and satisfies the constraints, i.e, it
-    is in \(S_{d, n}\).
+        \begin{gather*}
+            P(x_1, x_2, \ldots, x_n) = 
+            \begin{pmatrix}
+                a_{00\ldots 0} & a_{10\ldots 0} & \ldots & a_{00\ldots d}
+            \end{pmatrix}_{1\times \binom{n+d}{d}}
+            \begin{pmatrix}
+                1 & x_1 & \ldots & x_n^d
+            \end{pmatrix}^\top_{1\times \binom{n+d}{d}}
+        \end{gather*}
 
-    \emph{Induction on n:} Given a non-zero evaluating assignment can be found
-    for each degree \(c \leq d, \text{and number of variables } m < n\), I show
-    that we can find one for degree \(d\) and \(n\) variables.
+        Writing the condition for \(\mathbf{b}\) in this notation, it resolves
+        to the coefficient vector being acted on the right by the matrix \(M\)
+        with columns as the x-vector pre-evaluated over each \(\mathbf{b}\). The
+        condition assumed above is equivalent to this matrix having a
+        non-trivial kernel, i.e., there existing a coefficient vector which is
+        non-zero, such that all its evaluations over this set are 0.
 
-    Consider a polynomial \(f(x_1, x_2, \ldots, x_n)\). We can write, 
+        Consider any two distinct assignments \(A = (\alpha_1, \alpha_2, \ldots,
+        \alpha_n)\) and \(B = (\beta_1, \beta_2, \ldots \beta_n)\). Suppose
+        their pre-evaluated x-vectors (columns of \(M\)) are linearly dependent,
+        we have
 
-    \begin{gather*}
-        f(x_1, x_2, \ldots, x_n) = \sum_{i=0}^d x_1^i f_i(x_2, x_3, \ldots, x_n)~,
-    \end{gather*}
+        \begin{gather*}
+           \exists\;\lambda, \delta \in \complex ~\lambda \vec{X}(A) + \delta \vec{X}(B) = \vec{0}~.
+        \end{gather*}
 
-    for polynomials \(\{f_i\}\) in \(n-1\) variables and degrees \(\{d-i\}\)
-    respectively. Choose an assignment for the largest \(f_i \not \equiv 0\)
-    such that it satisfies the constraints for \(S_{d-i, n-1}\). After substitution, 
-    we obtain a univariate polynomial in \(x_1\) of degree atmost \(d\). 
+        Cherry-picking dimensions from this vector equation, first the degree 0
+        condition, and finally all the degree 1 conditions, we find
 
+        \begin{gather*}
+            \lambda\cdot 1 + \delta\cdot 1 = 0~, \\ 
+            \lambda = -\delta~,\\
+            \vec{X}(A) = \vec{X}(B)~, \text{ and}\\
+            \alpha_i = \beta_i \forall i~.
+        \end{gather*}
+
+        However, we stipulated that these assignments were distinct, so this is
+        a contradiction. Thus, columns of \(M\), which represent distinct
+        assignments, cannot be linearly dependent, \(M\) is of full-rank, and
+        thus has a trivial kernel. This again, is a contradiction, so contrary
+        to assumption, we must be able to find \(\mathbf{b} \in S_{d, n}\) for
+        every non-zero polynomial \(P\) of degree \(\leq d\) in \(n\) variables
+        such that it evaluates to a non-zero quantity over \(\mathbf{b}\).
+    
 \end{proof}
+
+% \begin{proof}
+%     Given the set \(S_{d, n}\) as defined, I induct on \(d\) and \(n\) for the
+%     polynomial \(f(x_1, x_2, \ldots, x_n)\) of total degree atmost \(d\).
+
+%     \emph{Base case:} \(n = 1, d = 1\).
+
+%     The relevant polynomial is \(f(x_1) = a_1 x_1 + a_0\), where atleast one
+%     \(a_i\) is non-zero, since \(f\) is not identically zero. If \(a_0 \not =
+%     0\), set \(x_1 = 0 < d\), else set \(x_1 = 1 \leq d\). This assignment
+%     results in a non-vanishing evaluation and satisfies the constraints, i.e, it
+%     is in \(S_{d, n}\).
+
+%     \emph{Induction on n:} Given a non-zero evaluating assignment can be found
+%     for each degree \(c \leq d, \text{and number of variables } m < n\), I show
+%     that we can find one for degree \(d\) and \(n\) variables.
+
+%     Consider a polynomial \(f(x_1, x_2, \ldots, x_n)\). We can write, 
+
+%     \begin{gather*}
+%         f(x_1, x_2, \ldots, x_n) = \sum_{i=0}^d x_1^i f_i(x_2, x_3, \ldots, x_n)~,
+%     \end{gather*}
+
+%     for polynomials \(\{f_i\}\) in \(n-1\) variables and degrees \(\{d-i\}\)
+%     respectively. Choose an assignment for the largest \(i\) for which \(f_i
+%     \not \equiv 0\) such that it satisfies the constraints for \(S_{d-i, n-1}\).
+%     After substitution, we obtain a univariate polynomial in \(x_1\) of degree
+%     atmost \(i\). 
+
+%     We know that we can find a non-zero evaluation for this with an assignment
+%     from the set \(S_{i, 1}\). Appending this to the chosen assignment for
+%     \(f_i\). This gives us a suitable assignment within \(S_{d, n}\) as the
+%     first assignment constrained the sum of variables to be under \(d-i\) and
+%     the appended assignment constrains to \(\leq i\), giving a total assignment
+%     satisfying the condition of their sum being \(\leq d\).
+
+%     \emph{Induction on d:} Given a non-zero evaluating assignment can be found
+%     for each degree \(c < d, \text{and number of variables } m \leq n\), I show
+%     that we can find one for degree \(d\) and \(n\) variables.
+
+%     Write this time the polynomial whilst separating all degree \(d\) terms
+
+%     \begin{gather*}
+%         P(x_1, x_2, \ldots, x_n) = P_0(x_1, x_2, \ldots, x_n) + x_1P_1(x_1, x_2, \ldots, x_n) + x_2P_2(x_2, \ldots, x_n) + \ldots + x_nP_n(x_n)~,
+%     \end{gather*}
+
+%     where \(P_0\) contains all terms in \(P\) of degree \(< d\) and to construct
+%     each further \(P_i\), of the remaining terms, collect those divisible by
+%     \(x_i\) and collect the respective quotients, repeating with the remaining
+%     indivisible terms for \(i+1\). This procedure is guaranteed to finish since
+%     every term of non-zero degree is divisible by one or more of the constituent
+%     variables.
+
+%     Note that the \(\{P_i\}\) are guaranteed to be polynomials of degree \(< d\)
+%     in \(\leq n\) variables. Find the smallest \(i\) for which \(P_i \not \equiv
+%     0\). This is possible since \(P\) is non-zero. Fix first \(x_i = 1\). Now,
+%     consider an assignment for this polynomial \(P_i(1, x_{i+1}, \ldots, x_n)\)
+%     satisfying the conditions for \(S_{d-1, n-i+1}\). Append \(x_i = 1\) and
+%     \(x_j = 0 \forall j < i\) to this assignment. This generates a non-zero
+%     assignment for \(P\) in \(S_{d, n}\).
+
+%     Note: there is an edge case here, where \(i = n\). i.e. \(P(\mathbf{x}) =
+%     x_n P_n(x_n)\). This procedure sets \(x_n = 1\), but we could have \(P_n(1)
+%     = 0\) as well. However, this scenario produces \(P \equiv 0\). 
+
+% \end{proof}

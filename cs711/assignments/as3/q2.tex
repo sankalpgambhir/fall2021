@@ -1,5 +1,59 @@
 \question
 
+\newcommand{\bvar}{\mathbf{b}}
+
 \begin{proof}
-    Given the set \(T_{d, n} = \). TODO.
+    Given the set \(T_{d, n}\) as defined, suppose if possible, that we cannot
+    find any vector in the set such that a given non-zero polynomial \(P\) of
+    degree \(d\) in \(n\) variables evaluates to a non-zero value on it. I prove
+    that this leads to a contradiction.
+
+    The evaluation condition implies \(P(\bvar) = 0\) for every \(\bvar \in
+    T_{d, n}\). Instead of writing it as a polynomial system, evaluate each
+    possible variable in \(P(x_1, x_2, \ldots, x_n)\) and write it as the
+    following linear system
+
+    \begin{gather*}
+        \begin{pmatrix}
+            a_{00\ldots 0} & a_{10\ldots 0} & \ldots & a_{00\ldots 0 d}
+        \end{pmatrix}
+        \begin{pmatrix}
+            x_1^0x_2^0\ldots x_n^0 & x_1^1x_2^0\ldots x_n^0 & \ldots & x_1^0x_2^0\ldots x_n^d
+        \end{pmatrix}^\top
+    \end{gather*}
+
+    This linear system has dimension \(\binom{n+d}{d}\). Given that we have
+    evaluations on \(\binom{n+d}{d}\) points as well, we can write this as the
+    linear system
+
+    \begin{gather*}
+        \begin{pmatrix}
+            a_{00\ldots 0} & a_{10\ldots 0} & \ldots & a_{00\ldots 0 d}
+        \end{pmatrix}
+        \begin{pmatrix}
+            p_1^{0\cdot 0}p_2^{0 \cdot 0}\ldots p_n^{0 \cdot 0} & p_1^{0\cdot 1}p_2^{0 \cdot 1}\ldots p_n^{0 \cdot 1} & \ldots & p_1^{0\cdot t}p_2^{0 \cdot t}\ldots p_n^{0 \cdot t}\\
+            p_1^{1\cdot 0}p_2^{0 \cdot 0}\ldots p_n^{0 \cdot 0} & p_1^{1\cdot 1}p_2^{0 \cdot 1}\ldots p_n^{0 \cdot 1} & \ldots & p_1^{1\cdot t}p_2^{0 \cdot t}\ldots p_n^{0 \cdot t}\\
+            \vdots & \ddots & \ddots & \vdots\\
+            p_1^{0\cdot 0}p_2^{0 \cdot 0}\ldots p_n^{d \cdot 0} & p_1^{0\cdot 1}p_2^{0 \cdot 1}\ldots p_n^{d \cdot 1} & \ldots & p_1^{0\cdot t}p_2^{0 \cdot t}\ldots p_n^{d \cdot t}\\
+        \end{pmatrix} = 
+        \begin{pmatrix}
+            0 & 0 \ldots & 0
+        \end{pmatrix}~,
+    \end{gather*}
+
+    with \(t = \binom{n+d}{d}\). This matrix must have a non-trvial kernel,
+    since the coefficients were constrained to be non-zero. However, note that
+    this is the Vandermonde matrix in the \(\binom{n+d}{d}\) integers
+    \(\{p_1^{\alpha_1}p_2^{\alpha_2}\ldots p_n^{\alpha_n}\}\), with \(\sum
+    \alpha_i \leq d\). Since these are distinct primes, there are no duplicates
+    in this set, and thus the determinant of the Vandermonde matrix must be
+    non-zero. However, this would mean that it is of full rank and has a trivial
+    kernel, this is a contradiction. 
+    
+    Thus, our assumption of being unable to produce a non-zero
+    evaluation over the given set was incorrect, and there exists a vector in
+    \(T_{d, n}\) for every polynomial of maximum total degree \(d\) and \(n\)
+    variables such that it evaluates to a non-zero complex quantity over the
+    given vector provided that it is not identically zero.
+
 \end{proof}

@@ -1,3 +1,50 @@
 \question
 
-Hello
+\newcommand{\xvar}{\mathbf{x}}
+\newcommand{\yvar}{\mathbf{y}}
+
+Given the matrix \(M\) as defined and the functions \(\{f_i(\yvar)\}\),
+note that the non-vanishing of the \(\det(M)\) implies the linear independence
+of \(\{(f_i(\xvar_j))\}\) as vectors of functions. I prove instead the converse,
+that their linear \emph{dependence} correspond to each other.
+
+\underline{Forward Implication \(\Rightarrow\):} Linear dependence of
+\(\{f_i(\yvar)\}\) implies the vanishing of \(\det(M)\).
+
+Given that the functions with the y's as variables are linearly dependent, we
+can find a set of coefficients \(\{\alpha_i\}\) such that 
+
+\begin{gather*}
+    \sum \alpha_i f_i(\yvar) = 0~.
+\end{gather*}
+
+Substituting one-by-one \(\yvar\) by each \(\xvar_i\), we obtain \(n\) linear
+dependence equations, which combined imply
+
+\begin{gather*}
+    \sum \alpha_i \begin{pmatrix}
+        f_1(\xvar_i) & f_2(\xvar_i) & \ldots & f_n(\xvar_i)
+    \end{pmatrix}^\top = 0~.
+\end{gather*}
+
+This is precisely the condition for linear dependence of the columns of \(M\),
+and thus its determinant vanishes.
+
+\underline{Backward Implication \(\Leftarrow\):} Vanishing of \(\det(M)\) implies
+the linear dependence of \(\{f_i(\yvar)\}\).
+
+Given that the determinant vanishes, we know that the \emph{rows} must be
+linearly dependent, i.e., we can find a set \(\{\alpha_i\}\) such that
+
+\begin{gather*}
+    \sum \alpha_i \begin{pmatrix}
+        f_i(\xvar_1) & f_i(\xvar_2) & \ldots & f_i(\xvar_n)
+    \end{pmatrix}^\top = 0~.
+\end{gather*}
+
+Pick an arbitrary coordinate and substitute for the \(\xvar_j\) with \(y\), and
+we recover the dependence criterion for the \(f_i(\yvar)\).
+
+This proves that the linear dependence of the \(\{f_i(\yvar)\}\) is equivalent
+to the vanishing of \(\det(M)\), and by extension, the linear independence is
+equivalent to its non-vanishing.
