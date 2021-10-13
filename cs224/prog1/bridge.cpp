@@ -107,20 +107,21 @@ void Bridge::process_buffer(){
         *log << s << std::endl;
 
         // is the message worth broadcasting?
-        if (m.root <= get_root()){
+        if (m.root <= this->get_root()){
             bool cutline = false;
 
             // better root discovered?
-            if(m.root < get_root()){
+            if(m.root < this->get_root()){
                 this->update_root(m, port);
             }
             else{
                 // shorter path discovered?
-                if((m.distance+1) < distance_to_root){
+                if((m.distance+1) < this->distance_to_root){
+                    // possibly never used ---
                     this->update_root(m, port);
                 }
                 // better sender discovered?
-                else if(distance_to_root == (m.distance+1) && m.sender < sender_to_root){
+                else if(this->distance_to_root == (m.distance+1) && m.sender < this->sender_to_root){
                     this->update_root(m, port);
                 }
                 else{
@@ -131,6 +132,7 @@ void Bridge::process_buffer(){
                     for(auto &c : connections){
                         if(c.second != state::RP && c.first->get_id() == port && get_id() > m.sender){
                             c.second = state::NP;
+                            this->check_all_cut();
                             break;
                         }
                     }
@@ -186,6 +188,8 @@ void Bridge::update_root(Message &m, int port){
             c.second = state::RP;
         }
     }
+
+    this->check_all_cut();
 }
 
 void Bridge::sort(){
@@ -202,4 +206,26 @@ std::string Bridge::print_connections(){
     }
 
     return s;
+}
+
+void Bridge::check_all_cut(){
+    // is there a port left designated?
+    bool is_desig = false;
+
+    for(auto &c : connections){
+        if (c.second == state::DP){
+            is_desig = true;
+            break;
+        }
+    }
+
+    if(!is_desig){
+        // no designated ports left, close off RP
+        for(auto &c : connections){
+            if (c.second == state::RP){
+                c.second = state::NP;
+                break;
+            }
+        }
+    }
 }

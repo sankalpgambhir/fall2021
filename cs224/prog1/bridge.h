@@ -86,6 +86,7 @@ class Bridge{
         // output and control
         void sort();                                    // sort nodes
         std::string print_connections();                // prints its connections
+        void check_all_cut();                           // if no ports are DP, close RP too
 
         static int currtime;
 
