@@ -130,7 +130,7 @@ void Bridge::process_buffer(){
                     // this is either root port or loop
                     // if loop, cut
                     for(auto &c : connections){
-                        if(c.second != state::RP && c.first->get_id() == port && get_id() > m.sender){
+                        if(c.second != state::RP && c.first->get_id() == port && this->get_id() > m.sender){
                             c.second = state::NP;
                             this->check_all_cut();
                             break;
