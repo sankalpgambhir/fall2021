@@ -1,0 +1,118 @@
+\begin{frame}
+    \frametitle{Problem 3.11}
+
+    Let \(M\) be a smooth manifold. Show that the tensor product over \(C(M)\)
+    of two projective \(C(M)\)-modules is again a projective \(C(M)\) module.
+
+    % I prove this specifically for C(M) modules using ideas from vector
+    % bundles, painfully, and we'll see in a bit how this is proved in a larger
+    % context for an arbitrary ring with Vatsal in Q12.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Reframing}
+
+    Let \(M\) be a smooth manifold. Show that the tensor product over \(C(M)\)
+    of two spaces of smooth sections over vector bundles is again a space of
+    sections over a vector bundle. \\
+
+    For each pair of vector bundles \(E_1, E_2\), \(\exists E \in
+    \textsf{Bundle}_M\) such that 
+    
+    \begin{gather*}        
+        \Gamma(E_1) \otimes_{C(M)} \Gamma(E_2) \cong \Gamma(E)~.
+    \end{gather*}
+
+\end{frame}
+
+\begin{frame}
+
+    We propose that \(E = E_1\otimes E_2\).
+
+    Suppose we have a map between the two spaces, \(\chi\). We show that it is
+    bijective.
+
+    Elements in the space \(\Gamma(E_1) \otimes \Gamma(E_2)\) are tensor
+    products of sections \(s_1 \otimes s_2\), defined as mapping any point \(p
+    \in M\) to \(s_1(p)\otimes s_2(p)\). \\
+
+    \(\chi\) maps this to itself in the RHS. \(\chi\) is injective as an
+    inclusion map.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Surjectivity}
+
+    % is problematic, the sections on a tensor product of an arbitrary bundle
+    % may be horrendous, begin with trivial bundles
+
+    If \(E_1, E_2\) are trivial bundles of rank \(k_1, k_2\) respectively, we
+    can construct a linearly independent basis of sections for each
+    \(\Gamma(E_i)\). Let a choice of such bases be given by \(\{e_i\}\) and
+    \(\{f_i\}\). \\
+
+    The tensor product \(\{e_i\} \otimes \{f_i\}\) then produces a linearly
+    independent basis for \(\Gamma(E)\). 
+
+    % we can argue using the fact that the rank of the bundle carries over as
+    % the dimension of the space of sections
+
+    % so it is clear in the case E1 E2 are trivial. What happens when they are
+    % not? Can we forcefully trivialise them?
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Trivialising Bundles}
+
+    \begin{theorem}[Whitney Summands of Trivial Vector Bundles]
+        If \(X\) is a paracompact Hausdorff space, and \(E \to X\) is a
+        topological vector bundle, then for every vector subbundle \(E_1
+        \hookrightarrow E\), there exists a direct summand \(E_2 \hookrightarrow
+        E\) such that 
+
+        \begin{gather*}
+            E_1 \oplus E_2 \cong E~.
+        \end{gather*}
+
+    \end{theorem}
+
+\end{frame}
+
+\begin{frame}
+
+    Consider trivialisations of the chosen bundles \(E_1 \oplus E_1^\bot\) and
+    \(E_2 \oplus E_2^\bot\). We can then construct the diagram
+
+    \begin{center}
+        \begin{tikzpicture}[node distance={6cm}, thick, main/.style = {draw=none}]
+            \node[main] (1)                         {\(\Gamma(E_1) \otimes \Gamma(E_2)\)};
+            \node[main] (2) [right of=1]            {\(\Gamma(E_1\oplus E_1^\bot) \otimes \Gamma(E_2\oplus E_2^\bot)\)};
+            \node[main] (3) [below=1]               {\(\Gamma(E_1\otimes E_2)\)};
+            \node[main] (4) [right of=3]            {\(\Gamma((E_1\oplus E_1^\bot) \otimes (E_2\oplus E_2^\bot))\)};
+            
+            \draw[->] (2) to node[midway, above] {projection} (1);
+            \draw[->] (1) to node[midway, left] {\(\chi\)} (3);
+            \draw[->] (2) to node[midway, right] {\(\chi^\bot\)} (4);
+            \draw[->] (4) to node[midway, below] {projection} (3);
+        \end{tikzpicture}
+    \end{center}
+
+    All the other arrows are known to be surjective, the surjectivity of
+    \(\chi\) follows.
+
+\end{frame}
+
+\begin{frame}
+
+    Finally, since \(\chi\) is injective and surjective, it gives an isomorphism
+    between \(\Gamma(E_1) \otimes\Gamma(E_2)\) and \(\Gamma(E_1 \otimes E_2)\)
+    as required.
+
+    % making the tensor product of the two spaces of sections another space of
+    % sections, reframing again, making the tensor product of two projective
+    % C(M) modules again a projective C(M) module.
+
+\end{frame}

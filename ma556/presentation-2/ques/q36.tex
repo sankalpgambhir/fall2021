@@ -1,0 +1,55 @@
+\begin{frame}
+    \frametitle{Problem 3.6}
+
+    \textbf{Problem. } Suppose \(E\) is a vector bundle over \(M\), and \(U\) is
+    an open set containing \(p \in M\). Let \(s\) be a smooth section of
+    \(E_U\). Show that there exists a smooth section \(t\) of \(E\) whose
+    restriction to \(U\) agrees with \(s\) in a neighbourhood of \(p\).
+
+\end{frame}
+
+% define vector bundle and sections?
+
+\begin{frame}
+    
+    Given a smooth section \(s\) of \(E_U\), construct a smooth function \(f\)
+    over \(M\) such that it is uniformly \(1\) in a neighbourhood of \(p\) and
+    \(0\) everywhere outside \(U\). 
+
+    Note that \(f\cdot s\) is a smooth section of \(E_U\) as well. As it
+    vanishes along the boundary, we can trivially extend it to a global smooth
+    section
+
+    \begin{gather}
+        t(x) = \begin{cases}
+            f(x)\cdot s(x) \text{ if } x \in U \\
+            0 \text{ otherwise.}
+        \end{cases}
+    \end{gather}
+
+\end{frame}
+
+\begin{frame}
+    
+    By construction, it agrees with \(s\) in a neighbourhood of \(p\) when
+    restricted. \(t\) is the required section.
+
+    This only matches on a neighbourhood, can we do better? Can we define a
+    section on a slice of the space and extend it globally?
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Global Sections (lack thereof)}
+
+    Consider a trivial bundle on \(\reals\) given by \(\reals \times \reals\).
+    Construct a section on \(\reals \setminus \{0\}\) given by \(s(p) = (p,
+    \frac{1}{p})\).\\
+
+    Can we extend this to a section on the whole space? \\
+
+    Note that we can still construct a global section that agrees with this
+    section in a neighbourhood of any interior point of \(\reals \setminus
+    \{0\}\).
+
+\end{frame}
