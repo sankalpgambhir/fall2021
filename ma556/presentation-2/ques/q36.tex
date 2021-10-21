@@ -11,14 +11,25 @@
 % define vector bundle and sections?
 
 \begin{frame}
+    \frametitle{Smooth Sections}
+
+    A smooth section of a vector bundle \(\pi: E \to M\) is a smooth map \(s: M
+    \to E\) such that \(\pi \circ s = \textsf{id}\). \\
+
+    The space of sections over a vector bundle \(E\), \(\Gamma(E)\) carries the
+    structure of a vector space.
+
+\end{frame}
+
+\begin{frame}
     
     Given a smooth section \(s\) of \(E_U\), construct a smooth function \(f\)
     over \(M\) such that it is uniformly \(1\) in a neighbourhood of \(p\) and
-    \(0\) everywhere outside \(U\). 
+    \(0\) everywhere outside \(U\).  \pause
 
     Note that \(f\cdot s\) is a smooth section of \(E_U\) as well. As it
     vanishes along the boundary, we can trivially extend it to a global smooth
-    section
+    section \pause
 
     \begin{gather}
         t(x) = \begin{cases}
@@ -30,9 +41,119 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{Constructing the smooth function}
+
+    Consider the following construction, beginning with the standard mollifier, 
+    
+    \begin{gather*}
+        g(x) = \frac{1}{e^{\frac{-1}{1-x^2}}}~, \\
+        f(x) = \begin{cases}
+            1 \text{ if } x \leq 0 \\
+            \frac{1}{e^{1 - \frac{1}{1-x^2}}} \text{ if } 0 < x < 1 \\
+            0 \text{ if } x \geq 1 \\
+        \end{cases}~.
+    \end{gather*} \pause
+
+    Note that \(f\) is indeed smooth. By transforming and taking products of
+    functions of this kind, we can construct a required smooth function in
+    \(\reals^n\) with \(n\) being the dimension of our manifold.
+
+\end{frame}
+
+\begin{frame}
+
+    Example choice in \(\reals\):
+    
+    \begin{center}
+        \begin{tikzpicture}
+ 
+            \begin{axis}[
+                xmin = -1, xmax = 2,
+                ymin = -0.5, ymax = 1.5]
+                \addplot[
+                    domain = 0:1,
+                    samples = 10,
+                    smooth,
+                    thick,
+                    blue,
+                ] {exp((1/(x^2-1))+1)};
+                \addplot[
+                    domain = -1:0,
+                    samples = 5,
+                    smooth,
+                    thick,
+                    blue,
+                ] {1};
+                \addplot[
+                    domain = 1:2,
+                    samples = 5,
+                    smooth,
+                    thick,
+                    blue,
+                ] {0};
+            \end{axis}
+             
+            \end{tikzpicture}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}
+
+    For an interval
+    
+    \begin{center}
+        \begin{tikzpicture}
+ 
+            \begin{axis}[
+                xmin = -3, xmax = 2,
+                ymin = -0.5, ymax = 1.5]
+                \addplot[
+                    domain = 0:1,
+                    samples = 10,
+                    smooth,
+                    thick,
+                    blue,
+                ] {exp((1/(x^2-1))+1)};
+                \addplot[
+                    domain = -1:0,
+                    samples = 5,
+                    smooth,
+                    thick,
+                    blue,
+                ] {1};
+                \addplot[
+                    domain = 1:2,
+                    samples = 5,
+                    smooth,
+                    thick,
+                    blue,
+                ] {0};
+                \addplot[
+                    domain = -3:-1.97,
+                    samples = 5,
+                    smooth,
+                    thick,
+                    blue,
+                ] {0};
+                \addplot[
+                    domain = -2:-1,
+                    samples = 40,
+                    smooth,
+                    thick,
+                    blue,
+                ] {exp(((1/((-x-1)^2-1))+1))};
+            \end{axis}
+             
+            \end{tikzpicture}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}
     
     By construction, it agrees with \(s\) in a neighbourhood of \(p\) when
-    restricted. \(t\) is the required section.
+    restricted. \(t\) is the required section. \pause
 
     This only matches on a neighbourhood, can we do better? Can we define a
     section on a slice of the space and extend it globally?
@@ -46,7 +167,7 @@
     Construct a section on \(\reals \setminus \{0\}\) given by \(s(p) = (p,
     \frac{1}{p})\).\\
 
-    Can we extend this to a section on the whole space? \\
+    Can we extend this to a section on the whole space? \\ \pause
 
     Note that we can still construct a global section that agrees with this
     section in a neighbourhood of any interior point of \(\reals \setminus
